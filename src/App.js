@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Cite from './components/Cites'
 
 function App() {
   const [cite, setCite] = useState({})
@@ -18,9 +19,11 @@ function App() {
     consultAPI()
   }, [])
 
-  console.log(cite)
-
-  return <p>Hola</p>
+  return (
+    <div className='container'>
+      <Cite cite={cite} />
+    </div>
+  )
 }
 
 export default App
