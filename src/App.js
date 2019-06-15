@@ -22,6 +22,7 @@ function App() {
   return (
     <div className='container'>
       <Cite cite={cite} />
+      <button onClick={consultAPI}>Generar nueva</button>
     </div>
   )
 }
