@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import Cite from './components/Cites'
 
 function App() {
+  const [cite, setCite] = useState({})
+
+  const consultAPI = async () => {
+    const result = await axios(
+      'https://breaking-bad-quotes.herokuapp.com/v1/quotes'
+    )
+
+    // Agregar el resultado del API al state; (Similar a this.setState)
+    setCite(result.data[0])
+  }
+
+  // Consulta a una rest api
+  useEffect(() => {
+    consultAPI()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <Cite cite={cite} />
+      <button onClick={consultAPI}>Generar nueva</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
